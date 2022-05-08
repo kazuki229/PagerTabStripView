@@ -21,6 +21,9 @@ struct PagerTabItemModifier<NavTabView: View>: ViewModifier {
                 .onAppear {
                     DispatchQueue.main.async {
                         let frame = reader.frame(in: .named("PagerViewScrollView"))
+                        if frame.width == 0 {
+                            return
+                        }
                         index = Int(round(frame.minX / frame.width))
                         let tabView = navTabView()
                         let tabViewDelegate = tabView as? PagerTabViewDelegate
